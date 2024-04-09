@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
-    "build": "tsc",
-    "start": "./dist/index.js",
+    "build": "tsup src",
+    "start": "node dist/index.js",
     "dev": "nodemon src/index.ts"
   },
   "dependencies": {
@@ -20,6 +23,10 @@
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.21",
     "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
     "typescript": "^5.4.4"
-  }
+  },
+  "bin" : {
+    "execute" : "index.js"
+  } 
 }
