@@ -4,10 +4,9 @@ import { createServer } from "http";
 import { Server, Socket } from "socket.io";
 
 dotenv.config();
-// const server = express();
+const server = express();
 const PORT = process.env.PORT;
-// const serverHttp = createServer(server);
-const serverHttp = createServer();
+const serverHttp = createServer(server);
 const socketIo = new Server(serverHttp, {
   cors: {
     origin: "*",
@@ -15,7 +14,7 @@ const socketIo = new Server(serverHttp, {
   },
 });
 
-// server.use(express.json());
+server.use(express.json());
 
 const emailToSocketIdMap = new Map();
 const socketIdtoEmailMap = new Map();
@@ -27,7 +26,7 @@ routes.get("/", (req: Request, res: Response) => {
   res.status(200).send({ message: "Chegou" });
 });
 
-// server.use(routes);
+server.use(routes);
 
 socketIo.on("connection", (socket: Socket) => {
   console.log("Socket connected", socket.id);
@@ -73,8 +72,6 @@ socketIo.on("connection", (socket: Socket) => {
   });
 });
 
-serverHttp.listen(3000);
-
-// server.listen(PORT, () => {
-//   console.log(`Servidor Executando na porta ${PORT}`);
-// });
+serverHttp.listen(PORT, () => {
+  console.log(`Servidor Executando na porta ${PORT}`);
+});
